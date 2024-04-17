@@ -28,7 +28,10 @@ declare module 'express-session' {
 
 
 var app = express();
-app.use(cors())
+app.use(cors({
+  credentials: true,
+  origin: "http://localhost:3000"
+}))
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -42,13 +45,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   name: 'my_cookie',
   secret: 'ppkk55666655kkppkk55666655kkppkk55666655kkpp',
-  // cookie: {
-  //   httpOnly: true,
-  //   secure: true,
-  //   maxAge: 1000 * 60 * 60 * 7,
-  // },
-  // resave: true,
-  // saveUninitialized: false,
   store: MongoStore.create({
       mongoUrl: `mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`
   })
