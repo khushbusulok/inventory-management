@@ -10,6 +10,7 @@ import dbConfig from './config/db.config';
 import session from "express-session";
 import MongoStore from "connect-mongo";
 import authRouter from "./app/routes/auth";
+import cors from "cors";
 // var createError = require('http-errors');
 // var express = require('express');
 // var path = require('path');
@@ -27,7 +28,7 @@ declare module 'express-session' {
 
 
 var app = express();
-
+app.use(cors())
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

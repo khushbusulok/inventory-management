@@ -1,12 +1,14 @@
 "use client"
-import { login } from "../redux/slice/authSlice";
+import { loginMethod } from "../redux/slice/authSlice";
 // import { RootState } from "@/redux/store";
 import Link from "next/link";
 import { useState } from "react"
 import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../redux/store";
+import { UserType } from "../types/user";
 
 export default function Login(){
-    const dispatch = useDispatch();
+    const dispatch:AppDispatch = useDispatch();
     const[username, setUsername] = useState<string>('');
     const[password, setPassword] = useState<string>('');
     const[remember, setremember] = useState<any>(false)
@@ -16,8 +18,8 @@ export default function Login(){
         setremember(e.target.checked)
     }
     const handleLogin = () => {
-        const userData = {username, password, remember};
-        dispatch(login(userData));
+        const userData: UserType = {email:username, password, remember};
+        dispatch(loginMethod(userData));
         console.log(userData)
     }
     return(
